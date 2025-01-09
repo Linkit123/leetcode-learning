@@ -41,18 +41,12 @@ public class _189_RotateArray {
 
         //1. reverse entire "array"
         reverseArray(nums, 0, size - 1);
-        Utils.printArray(nums);
-        System.out.println("-----------------");
 
         //2. reverse before "k"
         reverseArray(nums, 0, k - 1);
-        Utils.printArray(nums);
-        System.out.println("-----------------");
 
         //3. reverse after "k"
         reverseArray(nums, k, size - 1);
-        Utils.printArray(nums);
-        System.out.println("-----------------");
 
     }
 
