@@ -1,5 +1,6 @@
+package neetcode;
+
 import java.util.Arrays;
-import java.util.HashMap;
 
 public class _3_TowSum {
     public static void main(String[] args) {

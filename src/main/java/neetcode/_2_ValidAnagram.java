@@ -1,3 +1,5 @@
+package neetcode;
+
 import java.util.HashMap;
 
 public class _2_ValidAnagram {
