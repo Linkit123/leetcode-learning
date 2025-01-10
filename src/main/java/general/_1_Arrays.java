@@ -10,7 +10,7 @@ public class _1_Arrays {
     }
 
     //Find the Sum of Array Elements
-    private static void sumArray(int[] arr) {
+    static void sumArray(int[] arr) {
         int sum = 0;
         for (int j : arr) {
             sum += j;
@@ -19,7 +19,7 @@ public class _1_Arrays {
     }
 
     //Count Occurrences of an Element
-    private static void countAppearElement(int element, int[] arr) {
+    static void countAppearElement(int element, int[] arr) {
         int count = 0;
         for (int j : arr) {
             if (j == element) {
