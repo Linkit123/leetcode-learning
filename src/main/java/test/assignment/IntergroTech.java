@@ -5,29 +5,21 @@ package test.assignment;
  * Phần 2: 16 câu hỏi trắc nghiệm về spring
  * Phần 3: Coding SQL entry level
  * Phần 4: 16 câu trắc nghiệm tiếng anh C1(Advanced)
- * <p>
+
  * Coding in Java: You are given a string of encrypted text (ciphertext).
  * The encryption algorithm used to create the ciphertext simply shifts all the alphabetic characters in the original (unencrypted) string by the same amount. But you don't know what this amount is.
  * Write the decipher function that takes the encrypted string as input, and returns the original, unencrypted string.
  * For example, imagine that the original message was "hello" and we shifted each
  * letter by two. The resulting ciphertext would be "jgnnq".
  * If the original message were "Coding tests are fun and challenging!" and we shifted each character by two, the resulting ciphertext would be "Eqfkpi vguvu ctg hwp cpf ejcnngpikpi!"
- * <p>
- * Write the decipher function that takes the encrypted string as input, and returns the original, unencrypted string.
- * For example, imagine that the original message was "hello" and we shifted each
- * letter by two. The resulting ciphertext would be "jgnnq".
- * I
- * If the original message were "Coding tests are fun and challenging!" and we shifted each character by two, the resulting
- * ciphertext would be "Eqfkpi vguvu ctg hwp cpf ejcnngpikpi!"
  * The decipher function takes two arguments: the ciphertext, and a word that we know appeared in the original plain text. Using these clues, the function must output the original text.
  * We will follow the English alphabet for this question. Note that the last letter of the alphabet Z will be followed by A. Likewise, z will be followed by a.
- * <p>
  * If the word you are searching for in the original string does not appear threre, return "Invalid".
- * <p>
- * <p>
+
  * 1. Example 1:
  * Input:
- * - "Eqfkpi vguvu ctg hwp!" • "tests"
+ * - "Eqfkpi vguvu ctg hwp!"
+ * - "tests"
  * Output:
  * - "Coding tests are fun!"
  * Explanation:
@@ -37,8 +29,7 @@ package test.assignment;
  * - "love"
  * Output:
  * - "abcz love"
- * <p>
- * <p>
+
  * 2. Example 2
  * Input:
  * - "cdeb nqxg"
@@ -134,8 +125,21 @@ public class IntergroTech {
         return cleartext.toString();
     }
 
+    public static String decipher3(String ciphertext, String knownWord) {
+        // find shift amount
+        String[] words = ciphertext.split(" ");
+        for(String word : words) {
+            for(int i = 0; i < word.length(); i++) {
+                word.charAt(0);
+            } 
+        }
+
+        return "";
+    }
     public static void main(String[] args) {
-        System.out.println(decipher2("Eqfkpi vguvu ctg hwp!", "tests")); // Output: "Coding tests are fun!"
-        System.out.println(decipher2("cdeb nqxg", "love")); // Output: "abcz love"
+        int a = "Eqfkpi".charAt(0) - "Eqfkpi".charAt(1);
+        System.out.println("linhtnnnnn: " + a);
+        // System.out.println(decipher2("Eqfkpi vguvu ctg hwp!", "tests")); // Output: "Coding tests are fun!"
+        // System.out.println(decipher2("cdeb nqxg", "love")); // Output: "abcz love"
     }
 }
