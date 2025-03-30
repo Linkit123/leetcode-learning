@@ -128,18 +128,48 @@ public class IntergroTech {
     public static String decipher3(String ciphertext, String knownWord) {
         // find shift amount
         String[] words = ciphertext.split(" ");
-        for(String word : words) {
-            for(int i = 0; i < word.length(); i++) {
-                word.charAt(0);
-            } 
+        int shift = findShift(words, knownWord);
+        System.out.println("shift: " + shift);
+
+        // find shift value by shift back with above amount
+        String decipherText = "";
+
+        for(int i = 0; i <= ciphertext.length() - 1; i++) {      
+            char c = ciphertext.charAt(i);
+            if (Character.isLetter(c)) {
+                // Apply shift to letters only
+                char base = Character.isUpperCase(c) ? 'A' : 'a';
+                int position = c - base;
+                int newPosition = (position - shift + 26) % 26;
+                char newChar = (char) (base + newPosition);
+                decipherText += newChar;
+            } else {
+                decipherText += c;
+            }
+            
         }
 
-        return "";
+        return decipherText;
     }
+
+    private static int findShift(String[] words, String knownWord) {
+        for(String word : words) {
+            for(int i = 1; i <= 25; i++) {
+                 String decipherText = "";
+                 for(int j = 0; j <= word.length() - 1; j++) {
+                     int a = (int) word.charAt(j);
+                     decipherText += (char) (a - i);
+                 }
+                 if (decipherText.equals(knownWord)) {
+                     return i;
+                 }
+            }
+         }
+         return 0;
+    }
+
     public static void main(String[] args) {
-        int a = "Eqfkpi".charAt(0) - "Eqfkpi".charAt(1);
-        System.out.println("linhtnnnnn: " + a);
-        // System.out.println(decipher2("Eqfkpi vguvu ctg hwp!", "tests")); // Output: "Coding tests are fun!"
-        // System.out.println(decipher2("cdeb nqxg", "love")); // Output: "abcz love"
+         System.out.println(decipher3("Eqfkpi vguvu ctg hwp!", "tests")); // Output: "Coding tests are fun!"
+//        System.out.println(decipher3("cdeb nqxg", "love")); // Output: "abcz love"
     }
 }
