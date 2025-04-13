@@ -139,9 +139,7 @@ public class IntergroTech {
             if (Character.isLetter(c)) {
                 // Apply shift to letters only
                 char base = Character.isUpperCase(c) ? 'A' : 'a';
-                int position = c - base;
-                int newPosition = (position - shift + 26) % 26;
-                char newChar = (char) (base + newPosition);
+                char newChar = (char) (base + (c - base + 26) % 26);
                 decipherText += newChar;
             } else {
                 decipherText += c;
@@ -157,7 +155,7 @@ public class IntergroTech {
             for(int i = 1; i <= 25; i++) {
                  String decipherText = "";
                  for(int j = 0; j <= word.length() - 1; j++) {
-                     int a = (int) word.charAt(j);
+                     int a = word.charAt(j);
                      decipherText += (char) (a - i);
                  }
                  if (decipherText.equals(knownWord)) {
@@ -169,7 +167,7 @@ public class IntergroTech {
     }
 
     public static void main(String[] args) {
-         System.out.println(decipher3("Eqfkpi vguvu ctg hwp!", "tests")); // Output: "Coding tests are fun!"
-//        System.out.println(decipher3("cdeb nqxg", "love")); // Output: "abcz love"
+//         System.out.println(decipher3("Eqfkpi vguvu ctg hwp!", "tests")); // Output: "Coding tests are fun!"
+        System.out.println(decipher3("cdeb nqxg", "love")); // Output: "abcz love"
     }
 }
