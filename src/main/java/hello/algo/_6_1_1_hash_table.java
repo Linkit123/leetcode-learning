@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class _6_1_hash_table {
+public class _6_1_1_hash_table {
     public static void main(String[] args) {
         ArrayHashMap a = new ArrayHashMap();
         a.put(123, "toi lalai");
