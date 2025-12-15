@@ -1,46 +1,90 @@
-package Mwaytree;
+package BinaryTree;
 
 import lombok.Getter;
 import lombok.Setter;
 
-public class MwayTree {
+public class BinaryTree {
     public static void main(String[] args) {
-        ex3();
+        ex6();
     }
 
+    // ex1: manual create binary tree
     public static void ex1() {
-        // Step 1: Tạo root
-        BinaryTreeNode node = new BinaryTreeNode(10);
-
-        // Step 2: Thêm children của root
-        BinaryTreeNode leftNode = new BinaryTreeNode(5);
-        BinaryTreeNode rightNode = new BinaryTreeNode(15);
-        node.setLeft(leftNode);
-        node.setRight(rightNode);
-
-        // Step 3: Thêm children của node 5
-        BinaryTreeNode left1Node = new BinaryTreeNode(3);
-        BinaryTreeNode right1Node = new BinaryTreeNode(7);
-        leftNode.setLeft(left1Node);
-        left1Node.setRight(right1Node);
+        var binaryTreeBuilder = new BinaryTreeBuilder();
+        var root = binaryTreeBuilder.build();
 
         // Verify
-        System.err.println("Root: " + node.getValue());
-        System.err.println("Left of root: " + node.getLeft().getValue());
-        System.err.println("Right of root: " + node.getRight().getValue());
+        System.err.println("Root: " + root.getValue());
+        System.err.println("Left of root: " + root.getLeft().getValue());
+        System.err.println("Right of root: " + root.getRight().getValue());
     }
 
+    // ex2: isLeaf method
     public static void ex2() {
         BinaryTreeNode leaf = new BinaryTreeNode(5);
         leaf.setLeft(new BinaryTreeNode(3));
         System.out.println(leaf.isLeaf());
     }
 
+    // ex3: hasOneChild method
     public static void ex3() {
         BinaryTreeNode leaf = new BinaryTreeNode(5);
         leaf.setLeft(new BinaryTreeNode(3));
         leaf.setRight(new BinaryTreeNode(3));
         System.out.println(leaf.hasOneChild());
+    }
+
+    // ex4: print in-order tree
+    public static void ex4() {
+        var binaryTreeBuilder = new BinaryTreeBuilder();
+        var root = binaryTreeBuilder.build();
+
+        printInOrder(root);
+    }
+
+    static void printInOrder(BinaryTreeNode node) {
+        if (node == null)
+            return;
+
+        // handle left
+        printInOrder(node.getLeft());
+        System.out.println("current node: " + node.getValue());
+        // handle right
+        printInOrder(node.getRight());
+    }
+
+    // print pre-order tree
+    public static void ex5() {
+        var binaryTreeBuilder = new BinaryTreeBuilder();
+        var root = binaryTreeBuilder.build();
+
+        printPreOrder(root);
+    }
+
+    static void printPreOrder(BinaryTreeNode node) {
+        System.out.println("current node: " + node.getValue());
+        if (node.getLeft() == null)
+            return;
+
+        printPreOrder(node.getLeft());
+        printPreOrder(node.getRight());
+    }
+
+    // print post-order tree
+    public static void ex6() {
+        var binaryTreeBuilder = new BinaryTreeBuilder();
+        var root = binaryTreeBuilder.build();
+
+        printPostOrder(root);
+    }
+
+    static void printPostOrder(BinaryTreeNode node) {
+        if (node == null)
+            return;
+        
+        printPostOrder(node.getLeft());
+        printPostOrder(node.getRight());
+        System.out.println("current node: " + node.getValue());
     }
 }
 
@@ -63,5 +107,25 @@ class BinaryTreeNode {
 
     public boolean hasOneChild() {
         return (left == null && right != null) || (left != null && right == null);
+    }
+}
+
+class BinaryTreeBuilder {
+    public BinaryTreeNode build() {
+        // Step 1: Tạo root
+        BinaryTreeNode node = new BinaryTreeNode(10);
+
+        // Step 2: Thêm children của root
+        BinaryTreeNode leftNode = new BinaryTreeNode(8);
+        BinaryTreeNode rightNode = new BinaryTreeNode(9);
+        node.setLeft(leftNode);
+        node.setRight(rightNode);
+
+        // Step 3: Thêm children của node 5
+        BinaryTreeNode left1Node = new BinaryTreeNode(3);
+        BinaryTreeNode right1Node = new BinaryTreeNode(7);
+        leftNode.setLeft(left1Node);
+        leftNode.setRight(right1Node);
+        return node;
     }
 }
