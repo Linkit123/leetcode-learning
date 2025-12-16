@@ -1,4 +1,4 @@
-package BinaryTree;
+package test.assignment.MyExample;
 
 import lombok.Getter;
 import lombok.Setter;
