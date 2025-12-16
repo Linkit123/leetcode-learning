@@ -5,10 +5,11 @@ import java.util.Collections;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.val;
 
 public class BinaryTree {
     public static void main(String[] args) {
-        ex10();
+        ex11();
     }
 
     // ex1: manual create binary tree
@@ -159,6 +160,38 @@ public class BinaryTree {
         }
 
         return sumAllNodes(node.getLeft()) + sumAllNodes(node.getRight()) + node.getValue();
+    }
+
+    // ex11: search operations
+    public static void ex11() {
+        var binaryTreeBuilder = new BinaryTreeBuilder();
+        var root = binaryTreeBuilder.build();
+
+        int tartget = 3;
+        System.err.println("search for value " + tartget + ": " + searchOperators(root, tartget));
+    }
+
+    static String searchOperators(BinaryTreeNode node, int tartget) {
+        // node == null
+        if (node == null) {
+            return "not found 1";
+        }
+
+        // node.value == value
+        if (tartget == node.getValue()) {
+            return "founded";
+        }
+
+        // value < left -> search left
+        if (node.getLeft() != null && tartget < node.getLeft().getValue()) {
+            return searchOperators(node.getLeft(), tartget);
+
+        } else if (node.getRight() != null) {
+            // value > left -> search right
+            return searchOperators(node.getRight(), tartget);
+        }
+
+        return "not found 2";
     }
 
 }
