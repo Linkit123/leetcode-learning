@@ -8,7 +8,7 @@ import lombok.Setter;
 
 public class BinaryTree {
     public static void main(String[] args) {
-        ex9();
+        ex10();
     }
 
     // ex1: manual create binary tree
@@ -56,7 +56,7 @@ public class BinaryTree {
         printInOrder(node.getRight());
     }
 
-    // print pre-order tree
+    // ex5: print pre-order tree
     public static void ex5() {
         var binaryTreeBuilder = new BinaryTreeBuilder();
         var root = binaryTreeBuilder.build();
@@ -73,7 +73,7 @@ public class BinaryTree {
         printPreOrder(node.getRight());
     }
 
-    // print post-order tree
+    // ex6: print post-order tree
     public static void ex6() {
         var binaryTreeBuilder = new BinaryTreeBuilder();
         var root = binaryTreeBuilder.build();
@@ -90,7 +90,7 @@ public class BinaryTree {
         System.out.println("current node: " + node.getValue());
     }
 
-    // count all nodes
+    // ex7: count all nodes
     public static void ex7() {
         var binaryTreeBuilder = new BinaryTreeBuilder();
         var root = binaryTreeBuilder.build();
@@ -104,7 +104,7 @@ public class BinaryTree {
         return countNode(node.getLeft()) + countNode(node.getRight()) + 1;
     }
 
-    // calculate height of tree
+    // ex8: calculate height of tree
     public static void ex8() {
         var binaryTreeBuilder = new BinaryTreeBuilder();
         var root = binaryTreeBuilder.build();
@@ -124,7 +124,7 @@ public class BinaryTree {
         return max + 1;
     }
 
-    // count leaf nodes
+    // ex9: count leaf nodes
     public static void ex9() {
         var binaryTreeBuilder = new BinaryTreeBuilder();
         var root = binaryTreeBuilder.build();
@@ -145,6 +145,22 @@ public class BinaryTree {
         int right = countLeafNodes(node.getRight());
         return left + right;
     }
+
+    // ex10: sum value of all nodes
+    public static void ex10() {
+        var binaryTreeBuilder = new BinaryTreeBuilder();
+        var root = binaryTreeBuilder.build();
+        System.err.println("leaf nodes number: " + sumAllNodes(root));
+    }
+
+    static int sumAllNodes(BinaryTreeNode node) {
+        if (node == null) {
+            return 0;
+        }
+
+        return sumAllNodes(node.getLeft()) + sumAllNodes(node.getRight()) + node.getValue();
+    }
+
 }
 
 @Getter
