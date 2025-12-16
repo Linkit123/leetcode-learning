@@ -5,7 +5,7 @@ import lombok.Setter;
 
 public class BinaryTree {
     public static void main(String[] args) {
-        ex6();
+        ex7();
     }
 
     // ex1: manual create binary tree
@@ -81,10 +81,25 @@ public class BinaryTree {
     static void printPostOrder(BinaryTreeNode node) {
         if (node == null)
             return;
-        
+
         printPostOrder(node.getLeft());
         printPostOrder(node.getRight());
         System.out.println("current node: " + node.getValue());
+    }
+
+    // count all nodes
+    public static void ex7() {
+        var binaryTreeBuilder = new BinaryTreeBuilder();
+        var root = binaryTreeBuilder.build();
+        System.err.println("total nodes: " + countNode(root));
+    }
+
+    static int countNode(BinaryTreeNode node) {
+        if (node == null) {
+            return 0;
+        }
+        int leftCount = countNode(node.getLeft()) + 1;
+        return leftCount + countNode(node.getRight()) + 1;
     }
 }
 

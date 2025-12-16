@@ -1,4 +1,4 @@
-package test.assignment.Inspius;
+package test.assignment.MyExample;
 
 /*
  * Question 2.1: Database Query - Stored Procedure
@@ -7,7 +7,7 @@ package test.assignment.Inspius;
  * from a users table based on age range and country.
  */
 
-public class SqlTest {
+public class _2_SqlTest {
 
     /*
      * Stored Procedure: filter_users_summary

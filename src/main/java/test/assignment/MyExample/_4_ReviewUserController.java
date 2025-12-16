@@ -1,4 +1,4 @@
-package test.assignment.Inspius;
+package test.assignment.MyExample;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

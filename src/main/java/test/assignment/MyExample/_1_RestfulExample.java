@@ -1,4 +1,4 @@
-package test.assignment.Inspius;
+package test.assignment.MyExample;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,9 +9,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.*;
 
 @SpringBootApplication
-public class RestfulExample {
+public class _1_RestfulExample {
   public static void main(String[] args) {
-    SpringApplication.run(RestfulExample.class, args);
+    SpringApplication.run(_1_RestfulExample.class, args);
   }
 
   List<String> items = Arrays.asList("apple", "banana", "apricot", "blueberry", "orange");
@@ -22,15 +22,7 @@ public class RestfulExample {
 
     @PostMapping("/filterItems")
     public List<String> filterItems(@RequestBody FilterRequest request) {
-
-      var response = new ArrayList<String>();
-      for (String item : items) {
-        if (item.contains(request.getFilterCondition())) {
-          response.add(item);
-        }
-      }
-
-      return response;
+      return items.stream().filter(item -> item.contains(request.getFilterCondition())).toList();
     }
   }
 }
