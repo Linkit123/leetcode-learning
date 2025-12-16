@@ -1,11 +1,14 @@
 package test.assignment.MyExample;
 
+import java.util.Arrays;
+import java.util.Collections;
+
 import lombok.Getter;
 import lombok.Setter;
 
 public class BinaryTree {
     public static void main(String[] args) {
-        ex7();
+        ex9();
     }
 
     // ex1: manual create binary tree
@@ -98,8 +101,49 @@ public class BinaryTree {
         if (node == null) {
             return 0;
         }
-        int leftCount = countNode(node.getLeft()) + 1;
-        return leftCount + countNode(node.getRight()) + 1;
+        return countNode(node.getLeft()) + countNode(node.getRight()) + 1;
+    }
+
+    // calculate height of tree
+    public static void ex8() {
+        var binaryTreeBuilder = new BinaryTreeBuilder();
+        var root = binaryTreeBuilder.build();
+        System.err.println("height of tree: " + heightOfTree(root));
+    }
+
+    static int heightOfTree(BinaryTreeNode node) {
+        if (node.getLeft() == null) {
+            return 0;
+        }
+
+        int left = heightOfTree(node.getLeft());
+        int right = heightOfTree(node.getLeft());
+
+        // find max
+        int max = Collections.max(Arrays.asList(left, right));
+        return max + 1;
+    }
+
+    // count leaf nodes
+    public static void ex9() {
+        var binaryTreeBuilder = new BinaryTreeBuilder();
+        var root = binaryTreeBuilder.build();
+        System.err.println("leaf nodes number: " + countLeafNodes(root));
+    }
+
+    static int countLeafNodes(BinaryTreeNode node) {
+
+        if (node == null) {
+            return 0;
+        }
+
+        if (node.getLeft() == null && node.getRight() == null) {
+            return 1;
+        }
+
+        int left = countLeafNodes(node.getLeft());
+        int right = countLeafNodes(node.getRight());
+        return left + right;
     }
 }
 
@@ -141,6 +185,11 @@ class BinaryTreeBuilder {
         BinaryTreeNode right1Node = new BinaryTreeNode(7);
         leftNode.setLeft(left1Node);
         leftNode.setRight(right1Node);
+
+        BinaryTreeNode left2Node = new BinaryTreeNode(2);
+        // BinaryTreeNode right2Node = new BinaryTreeNode(1);
+        left1Node.setLeft(left2Node);
+        // left1Node.setRight(right2Node);
         return node;
     }
 }
