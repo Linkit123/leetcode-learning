@@ -219,44 +219,50 @@ class BinaryTreeNode {
 }
 
 /**
- * build tree like this:
- *         10
- *        /  \
- *       8    9
- *       /  \
- *       3   7
- *      /   /  \
- *      2   5   6
+ * Build Binary Search Tree like this:
+ *         7
+ *        / \
+ *       4   9
+ *      / \ / \
+ *     2  5 8  10
+ *    /    \
+ *   1      6
  *         /
- *        4
+ *        3
  */
 class BinaryTreeBuilder {
     public BinaryTreeNode build() {
-        // Step 1: Tạo root
+        // Root
+        BinaryTreeNode node7 = new BinaryTreeNode(7);
+
+        // Level 2
+        BinaryTreeNode node4 = new BinaryTreeNode(4);
+        BinaryTreeNode node9 = new BinaryTreeNode(9);
+        node7.setLeft(node4);
+        node7.setRight(node9);
+
+        // Level 3
+        BinaryTreeNode node2 = new BinaryTreeNode(2);
+        BinaryTreeNode node5 = new BinaryTreeNode(5);
+        node4.setLeft(node2);
+        node4.setRight(node5);
+
+        BinaryTreeNode node8 = new BinaryTreeNode(8);
         BinaryTreeNode node10 = new BinaryTreeNode(10);
+        node9.setLeft(node8);
+        node9.setRight(node10);
 
-        // Step 2: Thêm children của root
-        BinaryTreeNode left10Node8 = new BinaryTreeNode(8);
-        BinaryTreeNode right10Node9 = new BinaryTreeNode(9);
-        node10.setLeft(left10Node8);
-        node10.setRight(right10Node9);
+        // Level 4
+        BinaryTreeNode node1 = new BinaryTreeNode(1);
+        node2.setLeft(node1);
 
-        // Step 3: Thêm children của cac node con
-        BinaryTreeNode left8Node3 = new BinaryTreeNode(3);
-        BinaryTreeNode right8Node7 = new BinaryTreeNode(7);
-        left10Node8.setLeft(left8Node3);
-        left10Node8.setRight(right8Node7);
+        BinaryTreeNode node6 = new BinaryTreeNode(6);
+        node5.setRight(node6);
 
-        BinaryTreeNode left2Node = new BinaryTreeNode(2);
-        left8Node3.setLeft(left2Node);
+        // Level 5
+        BinaryTreeNode node3 = new BinaryTreeNode(3);
+        node6.setLeft(node3);
 
-        BinaryTreeNode right7Node6 = new BinaryTreeNode(6);
-        BinaryTreeNode left7Node5 = new BinaryTreeNode(5);
-        right8Node7.setLeft(left7Node5);
-        right8Node7.setRight(right7Node6);
-
-        BinaryTreeNode right5Node4 = new BinaryTreeNode(4);
-        left7Node5.setLeft(right5Node4);
-        return node10;
+        return node7;
     }
 }
