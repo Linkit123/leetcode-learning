@@ -9,7 +9,7 @@ import lombok.val;
 
 public class BinaryTree {
     public static void main(String[] args) {
-        ex11();
+        ex12();
     }
 
     // ex1: manual create binary tree
@@ -190,6 +190,30 @@ public class BinaryTree {
             return searchOperators(node.getRight(), target);
         }
 
+    }
+
+    // ex11: search operations with loop
+    public static void ex12() {
+        var binaryTreeBuilder = new BinaryTreeBuilder();
+        var root = binaryTreeBuilder.build();
+
+        int tartget = 8;
+        System.err.println("search for value " + tartget + ": " + searchOperatorsWithLoop(root, tartget));
+    }
+
+    public static String searchOperatorsWithLoop(BinaryTreeNode node, int target) {
+        while (node != null) {
+            if (target == node.getValue()) {
+                return "founded";
+            }
+
+            if (target < node.getValue()) {
+                node = node.getLeft();
+            } else {
+                node = node.getRight();
+            }
+        }
+        return "not found";
     }
 
 }
