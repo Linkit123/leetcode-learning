@@ -5,11 +5,10 @@ import java.util.Collections;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.val;
 
 public class BinaryTree {
     public static void main(String[] args) {
-        ex12();
+        ex14();
     }
 
     // ex1: manual create binary tree
@@ -192,7 +191,7 @@ public class BinaryTree {
 
     }
 
-    // ex11: search operations with loop
+    // ex12: search operations with loop
     public static void ex12() {
         var binaryTreeBuilder = new BinaryTreeBuilder();
         var root = binaryTreeBuilder.build();
@@ -214,6 +213,45 @@ public class BinaryTree {
             }
         }
         return "not found";
+    }
+
+    // ex13: find min
+    public static void ex13() {
+        var binaryTreeBuilder = new BinaryTreeBuilder();
+        var root = binaryTreeBuilder.build();
+
+        System.err.println("Min node is: " + findMinNode(root));
+    }
+
+    static int findMinNode(BinaryTreeNode node) {
+        if (node == null) {
+            return 0;
+        }
+
+        if(node.getLeft() == null && node.getRight() == null) {
+            return node.getValue();
+        }
+        return findMinNode(node.getLeft());
+    }
+
+    // ex13: find max
+    public static void ex14() {
+        var binaryTreeBuilder = new BinaryTreeBuilder();
+        var root = binaryTreeBuilder.build();
+
+        System.err.println("Max node is: " + findMaxNode(root));
+    }
+
+    static int findMaxNode(BinaryTreeNode node) {
+        if (node == null) {
+            return 0;
+        }
+
+        if (node.getLeft() == null && node.getRight() == null) {
+            return node.getValue();
+        }
+
+        return findMaxNode(node.getRight());
     }
 
 }
