@@ -167,14 +167,14 @@ public class BinaryTree {
         var binaryTreeBuilder = new BinaryTreeBuilder();
         var root = binaryTreeBuilder.build();
 
-        int tartget = 3;
+        int tartget = 1;
         System.err.println("search for value " + tartget + ": " + searchOperators(root, tartget));
     }
 
     static String searchOperators(BinaryTreeNode node, int tartget) {
         // node == null
         if (node == null) {
-            return "not found 1";
+            return "not found v1";
         }
 
         // node.value == value
@@ -183,7 +183,7 @@ public class BinaryTree {
         }
 
         // value < left -> search left
-        if (node.getLeft() != null && tartget < node.getLeft().getValue()) {
+        if (node.getLeft() != null && tartget <= node.getLeft().getValue()) {
             return searchOperators(node.getLeft(), tartget);
 
         } else if (node.getRight() != null) {
@@ -191,7 +191,7 @@ public class BinaryTree {
             return searchOperators(node.getRight(), tartget);
         }
 
-        return "not found 2";
+        return "not found v2";
     }
 
 }
@@ -218,27 +218,45 @@ class BinaryTreeNode {
     }
 }
 
+/**
+ * build tree like this:
+ *         10
+ *        /  \
+ *       8    9
+ *       /  \
+ *       3   7
+ *      /   /  \
+ *      2   5   6
+ *         /
+ *        4
+ */
 class BinaryTreeBuilder {
     public BinaryTreeNode build() {
         // Step 1: Tạo root
-        BinaryTreeNode node = new BinaryTreeNode(10);
+        BinaryTreeNode node10 = new BinaryTreeNode(10);
 
         // Step 2: Thêm children của root
-        BinaryTreeNode leftNode = new BinaryTreeNode(8);
-        BinaryTreeNode rightNode = new BinaryTreeNode(9);
-        node.setLeft(leftNode);
-        node.setRight(rightNode);
+        BinaryTreeNode left10Node8 = new BinaryTreeNode(8);
+        BinaryTreeNode right10Node9 = new BinaryTreeNode(9);
+        node10.setLeft(left10Node8);
+        node10.setRight(right10Node9);
 
-        // Step 3: Thêm children của node 5
-        BinaryTreeNode left1Node = new BinaryTreeNode(3);
-        BinaryTreeNode right1Node = new BinaryTreeNode(7);
-        leftNode.setLeft(left1Node);
-        leftNode.setRight(right1Node);
+        // Step 3: Thêm children của cac node con
+        BinaryTreeNode left8Node3 = new BinaryTreeNode(3);
+        BinaryTreeNode right8Node7 = new BinaryTreeNode(7);
+        left10Node8.setLeft(left8Node3);
+        left10Node8.setRight(right8Node7);
 
         BinaryTreeNode left2Node = new BinaryTreeNode(2);
-        // BinaryTreeNode right2Node = new BinaryTreeNode(1);
-        left1Node.setLeft(left2Node);
-        // left1Node.setRight(right2Node);
-        return node;
+        left8Node3.setLeft(left2Node);
+
+        BinaryTreeNode right7Node6 = new BinaryTreeNode(6);
+        BinaryTreeNode left7Node5 = new BinaryTreeNode(5);
+        right8Node7.setLeft(left7Node5);
+        right8Node7.setRight(right7Node6);
+
+        BinaryTreeNode right5Node4 = new BinaryTreeNode(4);
+        left7Node5.setLeft(right5Node4);
+        return node10;
     }
 }
