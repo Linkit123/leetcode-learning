@@ -167,31 +167,29 @@ public class BinaryTree {
         var binaryTreeBuilder = new BinaryTreeBuilder();
         var root = binaryTreeBuilder.build();
 
-        int tartget = 1;
+        int tartget = 10;
         System.err.println("search for value " + tartget + ": " + searchOperators(root, tartget));
     }
 
-    static String searchOperators(BinaryTreeNode node, int tartget) {
+    static String searchOperators(BinaryTreeNode node, int target) {
         // node == null
         if (node == null) {
             return "not found v1";
         }
 
         // node.value == value
-        if (tartget == node.getValue()) {
+        if (target == node.getValue()) {
             return "founded";
         }
 
         // value < left -> search left
-        if (node.getLeft() != null && tartget <= node.getLeft().getValue()) {
-            return searchOperators(node.getLeft(), tartget);
-
-        } else if (node.getRight() != null) {
+        if (target < node.getValue()) {
+            return searchOperators(node.getLeft(), target);
+        } else {
             // value > left -> search right
-            return searchOperators(node.getRight(), tartget);
+            return searchOperators(node.getRight(), target);
         }
 
-        return "not found v2";
     }
 
 }
@@ -221,10 +219,10 @@ class BinaryTreeNode {
 /**
  * Build Binary Search Tree like this:
  *         7
- *        / \
- *       4   9
- *      / \ / \
- *     2  5 8  10
+ *        /  \
+ *       4     9
+ *      / \   / \
+ *     2  5  8  10
  *    /    \
  *   1      6
  *         /
