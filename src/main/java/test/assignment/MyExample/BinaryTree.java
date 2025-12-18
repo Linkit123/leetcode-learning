@@ -3,12 +3,14 @@ package test.assignment.MyExample;
 import java.util.Arrays;
 import java.util.Collections;
 
+import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.util.ObjectUtils;
 
 public class BinaryTree {
     public static void main(String[] args) {
-        ex14();
+        ex17();
     }
 
     // ex1: manual create binary tree
@@ -234,7 +236,7 @@ public class BinaryTree {
         return findMinNode(node.getLeft());
     }
 
-    // ex13: find max
+    // ex14: find max
     public static void ex14() {
         var binaryTreeBuilder = new BinaryTreeBuilder();
         var root = binaryTreeBuilder.build();
@@ -254,6 +256,89 @@ public class BinaryTree {
         return findMaxNode(node.getRight());
     }
 
+    // ex15: insert node
+    public static void ex15() {
+        var binaryTreeBuilder = new BinaryTreeBuilder();
+        var root = binaryTreeBuilder.build();
+
+        int newValue = 6;
+        insertNode(root, newValue);
+        printInOrder(root);
+    }
+
+    static BinaryTreeNode insertNode(BinaryTreeNode node, int value) {
+        if (node == null) {
+            return new BinaryTreeNode(value);
+        }
+
+        if (value < node.getValue()) {
+            // insert left
+            var leftNode = insertNode(node.getLeft(), value);
+            node.setLeft(leftNode);
+        } else {
+            // insert right
+            var rightNode = insertNode(node.getRight(), value);
+            node.setRight(rightNode);
+        }
+        return node;
+    }
+
+
+    // ex16: insert node with loop
+    public static void ex16() {
+        var binaryTreeBuilder = new BinaryTreeBuilder();
+        var root = binaryTreeBuilder.build();
+
+        int newValue = 6;
+        insertNodeWithLoop(root, newValue);
+        printInOrder(root);
+    }
+
+    static void insertNodeWithLoop(BinaryTreeNode node, int value) {
+
+        // handle root node is null
+        if (node == null) {
+            node = new BinaryTreeNode(value);
+            return;
+        }
+
+        // traverse to find parent node
+        BinaryTreeNode parentNode = null;
+        while(node != null) {
+            parentNode = node;
+
+            if (value < node.getValue()) {
+                // insert left
+                node = node.getLeft();
+            } else {
+                // insert right
+                node = node.getRight();
+            }
+        }
+
+        // handle duplicate value
+        if (value == parentNode.getValue()) {
+            return;
+        }
+
+        // insert
+        var newNode = new BinaryTreeNode(value);
+        if (value < parentNode.getValue()) {
+            parentNode.setLeft(newNode);
+        } else {
+            parentNode.setRight(newNode);
+        }
+    }
+
+    // ex17: build tree from list
+    public static void ex17() {
+        var list = Arrays.asList(1, 10, 2, 4, 3, 24, 6,13, 6, 8, 9);
+
+        var binaryTreeBuilder = new BinaryTreeBuilder();
+        var root = binaryTreeBuilder.build(list);
+        printInOrder(root);
+    }
+
 }
 
 @Getter
@@ -263,10 +348,11 @@ class BinaryTreeNode {
     private BinaryTreeNode left;
     private BinaryTreeNode right;
 
+    public BinaryTreeNode() {
+    }
+
     public BinaryTreeNode(int value) {
         this.value = value;
-        this.left = null;
-        this.right = null;
     }
 
     public boolean isLeaf() {
@@ -291,6 +377,40 @@ class BinaryTreeNode {
  *        3
  */
 class BinaryTreeBuilder {
+
+    static BinaryTreeNode insertNode(BinaryTreeNode node, int value) {
+        if (node == null) {
+            return new BinaryTreeNode(value);
+        }
+
+        if (value == node.getValue()) {
+            return node;
+        }
+
+        if (value < node.getValue()) {
+            // insert left
+            var leftNode = insertNode(node.getLeft(), value);
+            node.setLeft(leftNode);
+        } else {
+            // insert right
+            var rightNode = insertNode(node.getRight(), value);
+            node.setRight(rightNode);
+        }
+        return node;
+    }
+
+    public BinaryTreeNode build(List<Integer> list) {
+        if (ObjectUtils.isEmpty(list)) {
+            return null;
+        }
+
+        BinaryTreeNode root = null;
+        for (Integer i : list) {
+            root = insertNode(root, i);
+        }
+        return root;
+    }
+
     public BinaryTreeNode build() {
         // Root
         BinaryTreeNode node7 = new BinaryTreeNode(7);
@@ -316,12 +436,12 @@ class BinaryTreeBuilder {
         BinaryTreeNode node1 = new BinaryTreeNode(1);
         node2.setLeft(node1);
 
-        BinaryTreeNode node6 = new BinaryTreeNode(6);
-        node5.setRight(node6);
-
-        // Level 5
-        BinaryTreeNode node3 = new BinaryTreeNode(3);
-        node6.setLeft(node3);
+//        BinaryTreeNode node6 = new BinaryTreeNode(6);
+//        node5.setRight(node6);
+//
+//        // Level 5
+//        BinaryTreeNode node3 = new BinaryTreeNode(3);
+//        node6.setLeft(node3);
 
         return node7;
     }
