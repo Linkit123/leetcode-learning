@@ -1,11 +1,8 @@
 package test.assignment.MyExample;
 
 import java.util.Arrays;
-import java.util.Collections;
-
 import java.util.List;
-import lombok.Getter;
-import lombok.Setter;
+
 import org.springframework.util.ObjectUtils;
 
 public class BinaryTree {
@@ -67,10 +64,10 @@ public class BinaryTree {
     }
 
     static void printPreOrder(BinaryTreeNode node) {
-        System.out.println("current node: " + node.getValue());
-        if (node.getLeft() == null)
+        if (node == null)
             return;
 
+        System.out.println("current node: " + node.getValue());
         printPreOrder(node.getLeft());
         printPreOrder(node.getRight());
     }
@@ -114,16 +111,15 @@ public class BinaryTree {
     }
 
     static int heightOfTree(BinaryTreeNode node) {
-        if (node.getLeft() == null) {
-            return 0;
+        // define height as number of edges in longest path; leaf -> 0; empty -> -1
+        if (node == null) {
+            return -1;
         }
 
         int left = heightOfTree(node.getLeft());
-        int right = heightOfTree(node.getLeft());
+        int right = heightOfTree(node.getRight());
 
-        // find max
-        int max = Collections.max(Arrays.asList(left, right));
-        return max + 1;
+        return Math.max(left, right) + 1;
     }
 
     // ex9: count leaf nodes
@@ -152,7 +148,7 @@ public class BinaryTree {
     public static void ex10() {
         var binaryTreeBuilder = new BinaryTreeBuilder();
         var root = binaryTreeBuilder.build();
-        System.err.println("leaf nodes number: " + sumAllNodes(root));
+        System.err.println("sum of all nodes: " + sumAllNodes(root));
     }
 
     static int sumAllNodes(BinaryTreeNode node) {
@@ -168,26 +164,26 @@ public class BinaryTree {
         var binaryTreeBuilder = new BinaryTreeBuilder();
         var root = binaryTreeBuilder.build();
 
-        int tartget = 10;
-        System.err.println("search for value " + tartget + ": " + searchOperators(root, tartget));
+        int target = 10;
+        System.err.println("search for value " + target + ": " + searchOperators(root, target));
     }
 
     static String searchOperators(BinaryTreeNode node, int target) {
         // node == null
         if (node == null) {
-            return "not found v1";
+            return "not found";
         }
 
         // node.value == value
         if (target == node.getValue()) {
-            return "founded";
+            return "found";
         }
 
-        // value < left -> search left
+        // value < node -> search left
         if (target < node.getValue()) {
             return searchOperators(node.getLeft(), target);
         } else {
-            // value > left -> search right
+            // value > node -> search right
             return searchOperators(node.getRight(), target);
         }
 
@@ -198,14 +194,14 @@ public class BinaryTree {
         var binaryTreeBuilder = new BinaryTreeBuilder();
         var root = binaryTreeBuilder.build();
 
-        int tartget = 8;
-        System.err.println("search for value " + tartget + ": " + searchOperatorsWithLoop(root, tartget));
+        int target = 8;
+        System.err.println("search for value " + target + ": " + searchOperatorsWithLoop(root, target));
     }
 
     public static String searchOperatorsWithLoop(BinaryTreeNode node, int target) {
         while (node != null) {
             if (target == node.getValue()) {
-                return "founded";
+                return "found";
             }
 
             if (target < node.getValue()) {
@@ -227,13 +223,14 @@ public class BinaryTree {
 
     static int findMinNode(BinaryTreeNode node) {
         if (node == null) {
-            return 0;
+            throw new IllegalArgumentException("Tree is empty");
         }
 
-        if(node.getLeft() == null && node.getRight() == null) {
-            return node.getValue();
+        BinaryTreeNode current = node;
+        while (current.getLeft() != null) {
+            current = current.getLeft();
         }
-        return findMinNode(node.getLeft());
+        return current.getValue();
     }
 
     // ex14: find max
@@ -246,14 +243,14 @@ public class BinaryTree {
 
     static int findMaxNode(BinaryTreeNode node) {
         if (node == null) {
-            return 0;
+            throw new IllegalArgumentException("Tree is empty");
         }
 
-        if (node.getLeft() == null && node.getRight() == null) {
-            return node.getValue();
+        BinaryTreeNode current = node;
+        while (current.getRight() != null) {
+            current = current.getRight();
         }
-
-        return findMaxNode(node.getRight());
+        return current.getValue();
     }
 
     // ex15: insert node
@@ -262,13 +259,17 @@ public class BinaryTree {
         var root = binaryTreeBuilder.build();
 
         int newValue = 6;
-        insertNode(root, newValue);
+        root = insertNode(root, newValue);
         printInOrder(root);
     }
 
     static BinaryTreeNode insertNode(BinaryTreeNode node, int value) {
         if (node == null) {
             return new BinaryTreeNode(value);
+        }
+
+        if (value == node.getValue()) {
+            return node;
         }
 
         if (value < node.getValue()) {
@@ -283,42 +284,39 @@ public class BinaryTree {
         return node;
     }
 
-
     // ex16: insert node with loop
     public static void ex16() {
         var binaryTreeBuilder = new BinaryTreeBuilder();
         var root = binaryTreeBuilder.build();
 
         int newValue = 6;
-        insertNodeWithLoop(root, newValue);
+        root = insertNodeWithLoop(root, newValue);
         printInOrder(root);
     }
 
-    static void insertNodeWithLoop(BinaryTreeNode node, int value) {
+    static BinaryTreeNode insertNodeWithLoop(BinaryTreeNode node, int value) {
 
         // handle root node is null
         if (node == null) {
-            node = new BinaryTreeNode(value);
-            return;
+            return new BinaryTreeNode(value);
         }
 
         // traverse to find parent node
         BinaryTreeNode parentNode = null;
-        while(node != null) {
-            parentNode = node;
+        BinaryTreeNode current = node;
+        while(current != null) {
+            parentNode = current;
 
-            if (value < node.getValue()) {
-                // insert left
-                node = node.getLeft();
+            if (value < current.getValue()) {
+                // go left
+                current = current.getLeft();
+            } else if (value > current.getValue()) {
+                // go right
+                current = current.getRight();
             } else {
-                // insert right
-                node = node.getRight();
+                // duplicate value - do nothing
+                return node;
             }
-        }
-
-        // handle duplicate value
-        if (value == parentNode.getValue()) {
-            return;
         }
 
         // insert
@@ -328,6 +326,7 @@ public class BinaryTree {
         } else {
             parentNode.setRight(newNode);
         }
+        return node;
     }
 
     // ex17: build tree from list
@@ -341,28 +340,6 @@ public class BinaryTree {
 
 }
 
-@Getter
-@Setter
-class BinaryTreeNode {
-    private int value;
-    private BinaryTreeNode left;
-    private BinaryTreeNode right;
-
-    public BinaryTreeNode() {
-    }
-
-    public BinaryTreeNode(int value) {
-        this.value = value;
-    }
-
-    public boolean isLeaf() {
-        return this.left == null && this.right == null;
-    }
-
-    public boolean hasOneChild() {
-        return (left == null && right != null) || (left != null && right == null);
-    }
-}
 
 /**
  * Build Binary Search Tree like this:
