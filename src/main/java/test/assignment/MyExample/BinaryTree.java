@@ -341,16 +341,6 @@ public class BinaryTree {
 }
 
 
-/**
- * Build Binary Search Tree like this:
- *         7
- *        /  \
- *       4     9
- *      / \   / \
- *     2  5  8  10
- *    /
- *   1
- */
 class BinaryTreeBuilder {
 
     public BinaryTreeNode build(List<Integer> list) {
@@ -365,6 +355,16 @@ class BinaryTreeBuilder {
         return root;
     }
 
+    /**
+     * Build Binary Search Tree:
+     *         7
+     *        /  \
+     *       4     9
+     *      / \   / \
+     *     2  5  8  10
+     *    /
+     *   1
+     */
     public BinaryTreeNode build() {
         // Root
         BinaryTreeNode node7 = new BinaryTreeNode(7);
