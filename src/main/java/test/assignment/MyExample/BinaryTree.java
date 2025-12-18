@@ -338,8 +338,28 @@ public class BinaryTree {
         printInOrder(root);
     }
 
-}
+    // ex18: validate BST
+    public static void ex18() {
+        var binaryTreeBuilder = new BinaryTreeBuilder();
+        var root = binaryTreeBuilder.build();
 
+        System.out.println("this tree is BST?: " + isValidBTS(root, Integer.MIN_VALUE, Integer.MAX_VALUE));
+    }
+
+    static boolean isValidBTS(BinaryTreeNode node, long min, long max) {
+        if (node == null) {
+            return true;
+        }
+
+        if(node.getValue() <= min || node.getValue() >= max) {
+            return false;
+        }
+
+        return isValidBTS(node.getLeft(), min, node.getValue())
+            && isValidBTS(node.getRight(), node.getValue(), max);
+    }
+
+}
 
 class BinaryTreeBuilder {
 

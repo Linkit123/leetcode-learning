@@ -6,9 +6,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class BinaryTreeNode {
-    private int value;
-    private BinaryTreeNode left;
-    private BinaryTreeNode right;
+    int value;
+    BinaryTreeNode left;
+    BinaryTreeNode right;
 
     public BinaryTreeNode(int value) {
         this.value = value;
@@ -22,4 +22,3 @@ public class BinaryTreeNode {
         return (left == null && right != null) || (left != null && right == null);
     }
 }
-
