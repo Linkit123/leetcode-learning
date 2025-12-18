@@ -348,33 +348,10 @@ public class BinaryTree {
  *       4     9
  *      / \   / \
  *     2  5  8  10
- *    /    \
- *   1      6
- *         /
- *        3
+ *    /
+ *   1
  */
 class BinaryTreeBuilder {
-
-    static BinaryTreeNode insertNode(BinaryTreeNode node, int value) {
-        if (node == null) {
-            return new BinaryTreeNode(value);
-        }
-
-        if (value == node.getValue()) {
-            return node;
-        }
-
-        if (value < node.getValue()) {
-            // insert left
-            var leftNode = insertNode(node.getLeft(), value);
-            node.setLeft(leftNode);
-        } else {
-            // insert right
-            var rightNode = insertNode(node.getRight(), value);
-            node.setRight(rightNode);
-        }
-        return node;
-    }
 
     public BinaryTreeNode build(List<Integer> list) {
         if (ObjectUtils.isEmpty(list)) {
@@ -383,7 +360,7 @@ class BinaryTreeBuilder {
 
         BinaryTreeNode root = null;
         for (Integer i : list) {
-            root = insertNode(root, i);
+            root = BinaryTree.insertNode(root, i);
         }
         return root;
     }
@@ -412,13 +389,6 @@ class BinaryTreeBuilder {
         // Level 4
         BinaryTreeNode node1 = new BinaryTreeNode(1);
         node2.setLeft(node1);
-
-//        BinaryTreeNode node6 = new BinaryTreeNode(6);
-//        node5.setRight(node6);
-//
-//        // Level 5
-//        BinaryTreeNode node3 = new BinaryTreeNode(3);
-//        node6.setLeft(node3);
 
         return node7;
     }
