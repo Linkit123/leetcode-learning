@@ -7,7 +7,7 @@ import org.springframework.util.ObjectUtils;
 
 public class BinaryTree {
     public static void main(String[] args) {
-        ex17();
+        ex19();
     }
 
     // ex1: manual create binary tree
@@ -331,7 +331,7 @@ public class BinaryTree {
 
     // ex17: build tree from list
     public static void ex17() {
-        var list = Arrays.asList(1, 10, 2, 4, 3, 24, 6,13, 6, 8, 9);
+        var list = Arrays.asList(1, 10, 2, 4, 3, 24, 6, 13, 6, 8, 9);
 
         var binaryTreeBuilder = new BinaryTreeBuilder();
         var root = binaryTreeBuilder.build(list);
@@ -357,6 +357,35 @@ public class BinaryTree {
 
         return isValidBTS(node.getLeft(), min, node.getValue())
             && isValidBTS(node.getRight(), node.getValue(), max);
+    }
+
+    // ex19: find Kth smallest
+    public static void ex19() {
+        var binaryTreeBuilder = new BinaryTreeBuilder();
+        var root = binaryTreeBuilder.build();
+        int k = 4;
+        FindKthSmallest.findKthSmallest(root, k);
+        System.out.println(k + "th smallest is: " + FindKthSmallest.nodeValue);
+    }
+
+    static class FindKthSmallest {
+
+        static int count = 0;
+        static int nodeValue = 0;
+        static void findKthSmallest(BinaryTreeNode node, int k) {
+            if (node == null) {
+                return;
+            }
+
+            findKthSmallest(node.getLeft(), k);
+            count++;
+            if (count == k) {
+                nodeValue = node.getValue();
+                return;
+            }
+            findKthSmallest(node.getRight(), k);
+        }
+
     }
 
 }
