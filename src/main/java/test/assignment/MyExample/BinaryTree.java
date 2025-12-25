@@ -7,13 +7,13 @@ import org.springframework.util.ObjectUtils;
 
 public class BinaryTree {
     public static void main(String[] args) {
-        ex19();
+        ex21();
     }
 
     // ex1: manual create binary tree
     public static void ex1() {
         var binaryTreeBuilder = new BinaryTreeBuilder();
-        var root = binaryTreeBuilder.build();
+        var root = binaryTreeBuilder.buildBST();
 
         // Verify
         System.err.println("Root: " + root.getValue());
@@ -39,7 +39,7 @@ public class BinaryTree {
     // ex4: print in-order tree
     public static void ex4() {
         var binaryTreeBuilder = new BinaryTreeBuilder();
-        var root = binaryTreeBuilder.build();
+        var root = binaryTreeBuilder.buildBST();
 
         printInOrder(root);
     }
@@ -58,7 +58,7 @@ public class BinaryTree {
     // ex5: print pre-order tree
     public static void ex5() {
         var binaryTreeBuilder = new BinaryTreeBuilder();
-        var root = binaryTreeBuilder.build();
+        var root = binaryTreeBuilder.buildBST();
 
         printPreOrder(root);
     }
@@ -75,7 +75,7 @@ public class BinaryTree {
     // ex6: print post-order tree
     public static void ex6() {
         var binaryTreeBuilder = new BinaryTreeBuilder();
-        var root = binaryTreeBuilder.build();
+        var root = binaryTreeBuilder.buildBST();
 
         printPostOrder(root);
     }
@@ -92,7 +92,7 @@ public class BinaryTree {
     // ex7: count all nodes
     public static void ex7() {
         var binaryTreeBuilder = new BinaryTreeBuilder();
-        var root = binaryTreeBuilder.build();
+        var root = binaryTreeBuilder.buildBST();
         System.err.println("total nodes: " + countNode(root));
     }
 
@@ -106,7 +106,7 @@ public class BinaryTree {
     // ex8: calculate height of tree
     public static void ex8() {
         var binaryTreeBuilder = new BinaryTreeBuilder();
-        var root = binaryTreeBuilder.build();
+        var root = binaryTreeBuilder.buildBST();
         System.err.println("height of tree: " + heightOfTree(root));
     }
 
@@ -125,7 +125,7 @@ public class BinaryTree {
     // ex9: count leaf nodes
     public static void ex9() {
         var binaryTreeBuilder = new BinaryTreeBuilder();
-        var root = binaryTreeBuilder.build();
+        var root = binaryTreeBuilder.buildBST();
         System.err.println("leaf nodes number: " + countLeafNodes(root));
     }
 
@@ -147,7 +147,7 @@ public class BinaryTree {
     // ex10: sum value of all nodes
     public static void ex10() {
         var binaryTreeBuilder = new BinaryTreeBuilder();
-        var root = binaryTreeBuilder.build();
+        var root = binaryTreeBuilder.buildBST();
         System.err.println("sum of all nodes: " + sumAllNodes(root));
     }
 
@@ -162,7 +162,7 @@ public class BinaryTree {
     // ex11: search operations
     public static void ex11() {
         var binaryTreeBuilder = new BinaryTreeBuilder();
-        var root = binaryTreeBuilder.build();
+        var root = binaryTreeBuilder.buildBST();
 
         int target = 10;
         System.err.println("search for value " + target + ": " + searchOperators(root, target));
@@ -192,7 +192,7 @@ public class BinaryTree {
     // ex12: search operations with loop
     public static void ex12() {
         var binaryTreeBuilder = new BinaryTreeBuilder();
-        var root = binaryTreeBuilder.build();
+        var root = binaryTreeBuilder.buildBST();
 
         int target = 8;
         System.err.println("search for value " + target + ": " + searchOperatorsWithLoop(root, target));
@@ -216,7 +216,7 @@ public class BinaryTree {
     // ex13: find min
     public static void ex13() {
         var binaryTreeBuilder = new BinaryTreeBuilder();
-        var root = binaryTreeBuilder.build();
+        var root = binaryTreeBuilder.buildBST();
 
         System.err.println("Min node is: " + findMinNode(root));
     }
@@ -236,7 +236,7 @@ public class BinaryTree {
     // ex14: find max
     public static void ex14() {
         var binaryTreeBuilder = new BinaryTreeBuilder();
-        var root = binaryTreeBuilder.build();
+        var root = binaryTreeBuilder.buildBST();
 
         System.err.println("Max node is: " + findMaxNode(root));
     }
@@ -256,7 +256,7 @@ public class BinaryTree {
     // ex15: insert node
     public static void ex15() {
         var binaryTreeBuilder = new BinaryTreeBuilder();
-        var root = binaryTreeBuilder.build();
+        var root = binaryTreeBuilder.buildBST();
 
         int newValue = 6;
         root = insertNode(root, newValue);
@@ -287,7 +287,7 @@ public class BinaryTree {
     // ex16: insert node with loop
     public static void ex16() {
         var binaryTreeBuilder = new BinaryTreeBuilder();
-        var root = binaryTreeBuilder.build();
+        var root = binaryTreeBuilder.buildBST();
 
         int newValue = 6;
         root = insertNodeWithLoop(root, newValue);
@@ -334,14 +334,14 @@ public class BinaryTree {
         var list = Arrays.asList(1, 10, 2, 4, 3, 24, 6, 13, 6, 8, 9);
 
         var binaryTreeBuilder = new BinaryTreeBuilder();
-        var root = binaryTreeBuilder.build(list);
+        var root = binaryTreeBuilder.buildBST(list);
         printInOrder(root);
     }
 
     // ex18: validate BST
     public static void ex18() {
         var binaryTreeBuilder = new BinaryTreeBuilder();
-        var root = binaryTreeBuilder.build();
+        var root = binaryTreeBuilder.buildBST();
 
         System.out.println("this tree is BST?: " + isValidBTS(root, Integer.MIN_VALUE, Integer.MAX_VALUE));
     }
@@ -362,7 +362,7 @@ public class BinaryTree {
     // ex19: find Kth smallest
     public static void ex19() {
         var binaryTreeBuilder = new BinaryTreeBuilder();
-        var root = binaryTreeBuilder.build();
+        var root = binaryTreeBuilder.buildBST();
         int k = 4;
         FindKthSmallest.findKthSmallest(root, k);
         System.out.println(k + "th smallest is: " + FindKthSmallest.nodeValue);
@@ -388,11 +388,61 @@ public class BinaryTree {
 
     }
 
+    // ex20: find the lowest common ancestor in Binary Search Tree
+    public static void ex20() {
+        var binaryTreeBuilder = new BinaryTreeBuilder();
+        var root = binaryTreeBuilder.buildBST();
+
+        int p = 1;
+        int q = 1;
+        var node = findLowestCommonAncestor(root, p, q);
+        System.out.println("The lowest common ancestor of " + p + " and " + q + " is: " + node.getValue());
+    }
+
+    static BinaryTreeNode findLowestCommonAncestor(BinaryTreeNode root, int p, int q) {
+        if (p < root.getValue() && q < root.getValue()) {
+            return findLowestCommonAncestor(root.getLeft(), p, q);
+        } else if (p > root.getValue() && q > root.getValue()) {
+            return findLowestCommonAncestor(root.getRight(), p, q);
+        } else {
+            return root;
+        }
+    }
+
+    // ex20: find the lowest common ancestor in Binary Tree
+    public static void ex21() {
+        var binaryTreeBuilder = new BinaryTreeBuilder();
+        var root = binaryTreeBuilder.buildBST();
+
+        int p = 1;
+        int q = 1;
+        var node = findLowestCommonAncestorBT(root, p, q);
+        System.out.println("The lowest common ancestor of " + p + " and " + q + " is: " + node.getValue());
+    }
+
+    static BinaryTreeNode findLowestCommonAncestorBT(BinaryTreeNode root, int p, int q) {
+        if (root == null) {
+            return null;
+        }
+
+        if (root.getValue() == p || root.getValue() == q) {
+            return root;
+        }
+
+        var left = findLowestCommonAncestor(root.getLeft(), p, q);
+        System.out.println("1");
+
+
+        var right = findLowestCommonAncestor(root.getRight(), p, q);
+
+        return root;
+    }
+
 }
 
 class BinaryTreeBuilder {
 
-    public BinaryTreeNode build(List<Integer> list) {
+    public BinaryTreeNode buildBST(List<Integer> list) {
         if (ObjectUtils.isEmpty(list)) {
             return null;
         }
@@ -414,7 +464,7 @@ class BinaryTreeBuilder {
      *    /
      *   1
      */
-    public BinaryTreeNode build() {
+    public BinaryTreeNode buildBST() {
         // Root
         BinaryTreeNode node7 = new BinaryTreeNode(7);
 
@@ -440,5 +490,45 @@ class BinaryTreeBuilder {
         node2.setLeft(node1);
 
         return node7;
+    }
+
+    /**
+     * Build Binary Tree:
+     *             3
+     *          /     \
+     *        5        1
+     *      /   \     / \
+     *     6    2    0   8
+     *        /  \
+     *       7    4
+     */
+    public BinaryTreeNode build() {
+        // Root
+        BinaryTreeNode node3 = new BinaryTreeNode(3);
+
+        // Level 2
+        BinaryTreeNode node5 = new BinaryTreeNode(5);
+        BinaryTreeNode node1 = new BinaryTreeNode(1);
+        node3.setLeft(node5);
+        node3.setRight(node1);
+
+        // Level 3
+        BinaryTreeNode node6 = new BinaryTreeNode(6);
+        BinaryTreeNode node2 = new BinaryTreeNode(2);
+        node5.setLeft(node6);
+        node5.setRight(node2);
+
+        BinaryTreeNode node0 = new BinaryTreeNode(0);
+        BinaryTreeNode node8 = new BinaryTreeNode(8);
+        node1.setLeft(node0);
+        node1.setRight(node8);
+
+        // Level 4
+        BinaryTreeNode node7 = new BinaryTreeNode(7);
+        BinaryTreeNode node4 = new BinaryTreeNode(4);
+        node2.setLeft(node7);
+        node2.setRight(node4);
+
+        return node3;
     }
 }
