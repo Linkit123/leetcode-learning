@@ -412,7 +412,7 @@ public class BinaryTree {
     // ex20: find the lowest common ancestor in Binary Tree
     public static void ex21() {
         var binaryTreeBuilder = new BinaryTreeBuilder();
-        var root = binaryTreeBuilder.buildBST();
+        var root = binaryTreeBuilder.build();
 
         int p = 1;
         int q = 1;
@@ -429,13 +429,19 @@ public class BinaryTree {
             return root;
         }
 
-        var left = findLowestCommonAncestor(root.getLeft(), p, q);
-        System.out.println("1");
+        var left = findLowestCommonAncestorBT(root.getLeft(), p, q);
 
+        var right = findLowestCommonAncestorBT(root.getRight(), p, q);
 
-        var right = findLowestCommonAncestor(root.getRight(), p, q);
+        if (left != null && right != null) {
+            return root;
+        }
 
-        return root;
+        if (left != null) {
+            return left;
+        }
+
+        return right;
     }
 
 }
