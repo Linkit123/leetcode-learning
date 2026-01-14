@@ -1,4 +1,4 @@
-package test.assignment.MyExample;
+package general;
 
 import lombok.Getter;
 import lombok.Setter;

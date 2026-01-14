@@ -93,7 +93,7 @@ public class _4_BinarySearch {
     }
 
     static void ex4() {
-        int[] arr = {4,3};
+        int[] arr = {3,4,5,6,1,2};
         System.out.println(findMin(arr));
     }
 
@@ -101,24 +101,14 @@ public class _4_BinarySearch {
         int left = 0;
         int right = nums.length - 1;
 
-        while (left < right) {
-            int mid = (left + right) / 2;
-
-            if (nums[left] <= nums[mid] && nums[mid] <= nums[right]) {
-                return nums[left];
-            }
-
-            if (nums[left] >= nums[mid] && nums[mid] >= nums[right]) {
-                return nums[right];
-            }
-
-            if (nums[left] >= nums[mid] && nums[mid] <= nums[right]) {
-                right = mid;
-            } else {
+        while(left < right) {
+            int mid = (left + right)/2;
+            if(nums[mid] >= nums[right]) {
                 left = mid + 1;
+            } else {
+                right = mid;
             }
         }
-
         return nums[left];
     }
 }

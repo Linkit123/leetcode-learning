@@ -1,4 +1,4 @@
-package test.assignment.MyExample;
+package general;
 
 import java.util.Arrays;
 import java.util.List;

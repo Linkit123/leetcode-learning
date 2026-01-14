@@ -1,0 +1,5 @@
+Java memory: Heap, Stack, Thread, GC
+Spring components: Bean, IOC, DI, AOP, Data, Web,...
+Database: experience about Sql, NoSql
+Microservice: experience how to implement microservice
+Pseudo code: KeYC
