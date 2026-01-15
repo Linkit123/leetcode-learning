@@ -1,4 +1,4 @@
-package test.assignment.MyExample;
+package test.assignment.InspiusSrBackend;
 
 /**
  * MVC Code Review - Question 4.1

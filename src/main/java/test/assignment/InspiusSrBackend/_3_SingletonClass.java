@@ -1,4 +1,4 @@
-package test.assignment.MyExample;
+package test.assignment.InspiusSrBackend;
 
 public final class _3_SingletonClass {
 

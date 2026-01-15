@@ -1,4 +1,4 @@
-package test.assignment.MyExample;
+package test.assignment.InspiusSrBackend;
 
 /*
  * Question 2.1: Database Query - Stored Procedure

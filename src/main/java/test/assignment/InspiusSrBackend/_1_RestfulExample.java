@@ -1,6 +1,5 @@
-package test.assignment.MyExample;
+package test.assignment.InspiusSrBackend;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
