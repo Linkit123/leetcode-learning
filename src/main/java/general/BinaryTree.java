@@ -1,9 +1,11 @@
 package general;
 
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.util.ObjectUtils;
+
 import java.util.Arrays;
 import java.util.List;
-
-import org.springframework.util.ObjectUtils;
 
 public class BinaryTree {
     public static void main(String[] args) {
@@ -304,7 +306,7 @@ public class BinaryTree {
         // traverse to find parent node
         BinaryTreeNode parentNode = null;
         BinaryTreeNode current = node;
-        while(current != null) {
+        while (current != null) {
             parentNode = current;
 
             if (value < current.getValue()) {
@@ -351,12 +353,12 @@ public class BinaryTree {
             return true;
         }
 
-        if(node.getValue() <= min || node.getValue() >= max) {
+        if (node.getValue() <= min || node.getValue() >= max) {
             return false;
         }
 
         return isValidBTS(node.getLeft(), min, node.getValue())
-            && isValidBTS(node.getRight(), node.getValue(), max);
+                && isValidBTS(node.getRight(), node.getValue(), max);
     }
 
     // ex19: find Kth smallest
@@ -372,6 +374,7 @@ public class BinaryTree {
 
         static int count = 0;
         static int nodeValue = 0;
+
         static void findKthSmallest(BinaryTreeNode node, int k) {
             if (node == null) {
                 return;
@@ -462,13 +465,13 @@ class BinaryTreeBuilder {
 
     /**
      * Build Binary Search Tree:
-     *         7
-     *        /  \
-     *       4     9
-     *      / \   / \
-     *     2  5  8  10
-     *    /
-     *   1
+     * 7
+     * /  \
+     * 4     9
+     * / \   / \
+     * 2  5  8  10
+     * /
+     * 1
      */
     public BinaryTreeNode buildBST() {
         // Root
@@ -500,13 +503,13 @@ class BinaryTreeBuilder {
 
     /**
      * Build Binary Tree:
-     *             3
-     *          /     \
-     *        5        1
-     *      /   \     / \
-     *     6    2    0   8
-     *        /  \
-     *       7    4
+     * 3
+     * /     \
+     * 5        1
+     * /   \     / \
+     * 6    2    0   8
+     * /  \
+     * 7    4
      */
     public BinaryTreeNode build() {
         // Root
@@ -536,5 +539,25 @@ class BinaryTreeBuilder {
         node2.setRight(node4);
 
         return node3;
+    }
+}
+
+@Getter
+@Setter
+class BinaryTreeNode {
+    int value;
+    BinaryTreeNode left;
+    BinaryTreeNode right;
+
+    public BinaryTreeNode(int value) {
+        this.value = value;
+    }
+
+    public boolean isLeaf() {
+        return this.left == null && this.right == null;
+    }
+
+    public boolean hasOneChild() {
+        return (left == null && right != null) || (left != null && right == null);
     }
 }
