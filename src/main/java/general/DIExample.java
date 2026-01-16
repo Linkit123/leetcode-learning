@@ -2,8 +2,10 @@ package general;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,13 +29,13 @@ public class DIExample {
 
         private final TransactionService transactionService;
 
-        TransactionController(TransactionService transactionService) {
+        TransactionController(@Lazy TransactionService transactionService) {
             this.transactionService = transactionService;
         }
 
         @GetMapping("/transactions/entire")
         public List<Transaction> getAllTransactions() {
-            return transactionService.getAllTransactions();
+            return new ArrayList<>();
         }
 
     }
@@ -41,25 +43,25 @@ public class DIExample {
     @Service
     static class TransactionService {
 
-        private final ProductService productService;
+        private ProductService productService;
 
-        List<Transaction> transactions = new ArrayList<>();
-
-        TransactionService(ProductService productService) {
+        @Autowired
+        public void setProductService(ProductService productService) {
             this.productService = productService;
         }
 
         public List<Transaction> getAllTransactions() {
-            return transactions;
+            return new ArrayList<>();
         }
     }
 
     @Service
     static class ProductService {
 
-        private final TransactionService transactionService;
+        private TransactionService transactionService;
 
-        ProductService(TransactionService transactionService) {
+        @Autowired
+        void setTransactionService(TransactionService transactionService) {
             this.transactionService = transactionService;
         }
 
